@@ -7,22 +7,26 @@ import com.android.volley.toolbox.Volley;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,48 +35,94 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class MainActivity2 extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private ImageView imageView;
-    private Button pickButton, womanButton, manButton;
+    private Button pickButton, nextButton;
+    private String correct_Label;
+    private Bitmap selectedImageBitmap;
+    Intent intent2;
+    String clickedImage;
+    String selectedGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        Intent intent = getIntent();
+        String selectedGender = intent.getStringExtra("selectedGender");
+        if (selectedGender.equals("Female")){
+            setContentView(R.layout.activity_main2_woman);
+        }
+        else {
+            setContentView(R.layout.activity_main2_man);
+        }
 
         imageView = findViewById(R.id.image_view);
         pickButton = findViewById(R.id.pick_button);
-        womanButton = findViewById(R.id.woman_button);
-        manButton = findViewById(R.id.man_button);
-
-
+        nextButton = findViewById(R.id.next_button);
         pickButton.setOnClickListener(v -> openGallery());
+        nextButton.setVisibility(View.GONE);
 
-        womanButton.setVisibility(View.GONE);
-        manButton.setVisibility(View.GONE);
 
-        womanButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity2.this,MainActivity3.class);
-                startActivity(intent);
 
+                Intent intent = getIntent();
+                String selectedGender = intent.getStringExtra("selectedGender");
+
+                // Retrieve the selected style from the intent
+                String selectedStyle = intent.getStringExtra("selectedStyle");
+
+                // Retrieve the selected color from the intent
+                String selectedColor = intent.getStringExtra("selectedColor");
+                clickedImage = intent.getStringExtra("clicked_image");
+
+                String selectedAccessories = intent.getStringExtra("selectedAccessories");
+
+
+                if (selectedGender.equals("Female")) {
+                    if(clickedImage.equals("Image 1")) {
+                        intent2 = new Intent(MainActivity2.this, MainActivity3.class);
+                    } else if (clickedImage.equals("Image 2"))
+                    {
+                        intent2 = new Intent(MainActivity2.this, MainActivity5.class);
+
+                    }
+                    intent2.putExtra("selectedGender", selectedGender); // Pass the compressed data instead of the original bitmap
+                    intent2.putExtra("selectedStyle", selectedStyle); // Pass the compressed data instead of the original bitmap
+                    intent2.putExtra("selectedColor", selectedColor);
+                    intent2.putExtra("selectedAccessories", selectedAccessories);
+                    String correctLabel = getFirstLabel();
+                    intent2.putExtra("correct_Label", correctLabel);
+                    startActivity(intent2);
+
+                }
+                else {
+                    Intent intent2 = new Intent(MainActivity2.this, MainActivity4.class);
+                    intent2.putExtra("selectedGender", selectedGender); // Pass the compressed data instead of the original bitmap
+                    intent2.putExtra("selectedStyle", selectedStyle); // Pass the compressed data instead of the original bitmap
+                    intent2.putExtra("selectedColor", selectedColor);
+                    intent2.putExtra("selectedAccessories", selectedAccessories);
+                    String correctLabel = getFirstLabel();
+                    intent2.putExtra("correct_Label", correctLabel);
+                    startActivity(intent2);
+
+                }
+
+                setResult(RESULT_OK);
+                // Finish MainActivity2 to return to Form activity
+                finish();
             }
         });
 
-        manButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity2.this,MainActivity4.class);
-                startActivity(intent);
 
-            }
-        });
+
     }
-
 
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -86,14 +136,14 @@ public class MainActivity2 extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
             Uri imageUri = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                imageView.setImageBitmap(bitmap);
+                selectedImageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                imageView.setImageBitmap(selectedImageBitmap);
 
                 // Show additional buttons
-                womanButton.setVisibility(View.VISIBLE);
-                manButton.setVisibility(View.VISIBLE);
+                nextButton.setVisibility(View.VISIBLE);
 
-                performImageRecognition(bitmap);
+
+                performImageRecognition(selectedImageBitmap);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -103,7 +153,6 @@ public class MainActivity2 extends AppCompatActivity {
 
     private void performImageRecognition(Bitmap bitmap) {
         String apiKey = "AIzaSyBegy4c48uXczOI-8DSCwukC808A-gflWw"; // Google Cloud API key
-
         try {
             // Convert the Bitmap to a base64-encoded string
             String imageBase64 = encodeImageToBase64(bitmap);
@@ -112,30 +161,16 @@ public class MainActivity2 extends AppCompatActivity {
             String url = "https://vision.googleapis.com/v1/images:annotate?key=" + apiKey;
 
             // Create the JSON request payload
-            String jsonRequest = "{\"requests\": [{\"image\": {\"content\": \"" + imageBase64 + "\"}, \"features\": [{\"type\": \"LABEL_DETECTION\", \"maxResults\": 5}]}]}";
-
+            String jsonRequest = "{\"requests\": [{\"image\": {\"content\": \"" + imageBase64 + "\"}, \"features\": [{\"type\": \"OBJECT_LOCALIZATION\", \"maxResults\": 50}]}]}";
             // Send the POST request to the Vision API
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonRequest),
                     response -> {
                         try {
-                            // Process the response
-                            JSONArray labelAnnotations = response.getJSONArray("responses")
+                            // Process the object detection response
+                            JSONArray objectAnnotations = response.getJSONArray("responses")
                                     .getJSONObject(0)
-                                    .getJSONArray("labelAnnotations");
-
-                            // Extract and display the labels
-                            StringBuilder predictionsBuilder = new StringBuilder();
-                            for (int i = 0; i < labelAnnotations.length(); i++) {
-                                JSONObject label = labelAnnotations.getJSONObject(i);
-                                String description = label.getString("description");
-                                double score = label.getDouble("score");
-
-                                if (isClothingLabel(description)) {
-                                    predictionsBuilder.append("Label: ").append(description).append(", Score: ").append(score).append("\n");
-                                }
-                            }
-
-                            System.out.println(predictionsBuilder);
+                                    .getJSONArray("localizedObjectAnnotations");
+                            processObjectDetectionResults(objectAnnotations);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -148,12 +183,16 @@ public class MainActivity2 extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(this);
             queue.add(request);
 
+
+
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
+
     private boolean isClothingLabel(String label) {
-        String[] clothingKeywords = {"t-shirt", "shirt", "blouse", "polo shirt", "tank top", "sweater", "hoodie", "cardigan", "jacket", "coat", "blazer", "suit", "dress", "skirt", "shorts", "pants", "jeans", "leggings", "jumpsuit", "romper", "trousers", "capris", "cap", "hat", "beanie", "scarf", "shawl", "wrap", "poncho", "kimono", "gloves", "mittens", "socks", "stockings", "tights", "underwear", "bra", "panties", "boxers", "briefs", "thong", "swimwear", "bikini", "swimsuit", "one-piece", "robe", "pajamas", "nightgown", "nightdress", "slippers", "sneakers", "running shoes", "sports shoes", "sandals", "flip-flops", "boots", "ankle boots", "heels", "wedges", "flats", "loafers", "oxfords", "mules", "espadrilles", "tie", "bow tie", "belt", "suspenders", "cufflinks", "pocket square", "scarf", "tie clip", "sunglasses", "watch", "bracelet", "necklace", "earrings", "ring", "handbag", "tote bag", "clutch", "crossbody bag", "backpack", "wallet", "messenger bag", "briefcase", "suitcase", "umbrella", "coat hanger", "lingerie", "corset", "waistcoat", "tuxedo", "cummerbund", "tunic", "sari", "kimono", "hijab", "turban", "veil"};
+        String[] clothingKeywords = {"t-shirt", "shirt", "polo shirt", "", "tank top", "sweater", "hoodie", "cardigan", "jacket", "coat", "blazer", "suit", "dress", "skirt", "shorts", "pants", "jeans", "leggings", "jumpsuit", "romper", "trousers", "capris", "shawl", "wrap", "poncho", "kimono", "mittens", "stockings", "tights", "robe", "pajamas", "nightgown", "nightdress", "slippers", "sneakers", "running shoes", "sports shoes", "sandals", "flip-flops", "boots", "ankle boots", "heels", "wedges", "flats", "loafers", "oxfords", "mules", "espadrilles", "suspenders"};
+
         for (String keyword : clothingKeywords) {
             if (label.toLowerCase().contains(keyword)) {
                 return true;
@@ -169,5 +208,60 @@ public class MainActivity2 extends AppCompatActivity {
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
+
+    private void processObjectDetectionResults(JSONArray objectAnnotations) {
+        // Process object detection results
+        Intent intent3 = getIntent();
+        List<String> dress_oufit = new ArrayList<>(Arrays.asList("Shoe", "Dress"));
+        List<String> top_bottoms_oufit = new ArrayList<>(Arrays.asList("Dress"));
+
+        for (int i = 0; i < objectAnnotations.length(); i++) {
+            try {
+                JSONObject objectAnnotation = objectAnnotations.getJSONObject(i);
+                String name = objectAnnotation.getString("name");
+                clickedImage = intent3.getStringExtra("clicked_image");
+                String gender = intent3.getStringExtra("selectedGender");
+
+                if(isClothingLabel(name)) {
+
+                    if (correct_Label == null) {
+                        correct_Label = name;
+
+                    }
+                    if (gender.equals("Female")){
+                    if(clickedImage.equals("Image 2") && (!(dress_oufit.contains(correct_Label)))){
+                        correct_Label = null;
+                        ErrorUtils.showErrorDialog(MainActivity2.this,"", "You need to insert a photo with a dress or a photo with a pair of shoes.");
+                        nextButton.setVisibility(nextButton.GONE);
+                        return;
+
+                    }}
+                    if (gender.equals("Female")){
+                    if(clickedImage.equals("Image 1") && (top_bottoms_oufit.contains(correct_Label))){
+                        correct_Label = null;
+                        ErrorUtils.showErrorDialog(MainActivity2.this,"", "You need to insert a photo with a top, bottoms or a photo with a pair of shoes.");
+                        nextButton.setVisibility(nextButton.GONE);
+                        return;
+
+                    }}
+
+                }
+                else{
+
+                        ErrorUtils.showErrorDialog(MainActivity2.this,"", "This is not a clothing item. Please insert another picture");
+                        nextButton.setVisibility(nextButton.GONE);
+                        return;
+                    }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public String getFirstLabel() {
+
+        return correct_Label;
+    }
 
 }

@@ -23,22 +23,15 @@
         android:text="Upload" />
 
     <Button
-        android:id="@+id/woman_button"
+        android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/image_view"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:text="I'm a woman" />
+        android:layout_marginTop="90dp"
+        android:text="Next" />
 
-    <Button
-        android:id="@+id/man_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/image_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:text="I'm a man" />
+
 
 
 

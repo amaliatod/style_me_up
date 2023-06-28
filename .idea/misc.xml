@@ -3,10 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main.xml" value="0.13467293715262932" />
-        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main2.xml" value="0.25" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/frame.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/gradient_background.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/pink_shadow.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main2.xml" value="0.14666666666666667" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main2_man.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main2_woman.xml" value="0.1" />
         <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main3.xml" value="0.1" />
         <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main4.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main5.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main_man.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/administrator.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/create_account.xml" value="0.14749893116716545" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/delete_account.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/female_outfit.xml" value="0.14749893116716545" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/form.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/form_man.xml" value="0.16666666666666666" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/loading_page.xml" value="0.1" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/login.xml" value="0.14749893116716545" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/super_user.xml" value="0.1" />
       </map>
     </option>
   </component>
