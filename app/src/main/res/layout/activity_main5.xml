@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/gradient_background">
+    //android:background="#F4F4F4">
+
+    <!-- TextView -->
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <!-- First ImageView -->
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/random_pic"
+        android:scaleType="centerCrop"
+        android:rotation="45"
+        android:layout_margin="20dp"
+        android:elevation="8dp" />
+    <!--        android:outlineProvider="bounds"-->
+    <!--        android:background="@drawable/pink_shadow" />-->
+
+    <!-- Space between the images -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <!-- Second ImageView -->
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/random_pic"
+        android:scaleType="centerCrop"
+        android:rotation="15"
+        android:layout_margin="20dp"
+        android:elevation="8dp" />
+    <!--        android:outlineProvider="bounds"-->
+    <!--        android:background="@drawable/pink_shadow" />-->
+
+
+    <!-- Space between the images -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <!-- Regenerate Button -->
+    <Button
+        android:id="@+id/regenerateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I want another outfit"
+        android:background="#f1ded9"
+        android:textColor="#000000"/>
+</LinearLayout>

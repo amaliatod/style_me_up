@@ -1,0 +1,204 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+    //android:background="@drawable/gradient_background">
+
+    <ImageView
+        android:id="@+id/topImageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="-2dp"
+        android:src="@drawable/form1"
+        android:scaleType="centerCrop" />
+    <!-- Gender -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your gender:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:buttonTint="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButtonFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:buttonTint="#000000" />
+    </RadioGroup>
+
+    <!-- Occasion -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose the style for this outfit:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupOccasion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonCasual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Casual"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:buttonTint="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButtonFormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sport"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:buttonTint="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButtonParty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Party"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:buttonTint="#000000" />
+    </RadioGroup>
+
+    <!-- Color Preference -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usually I wear ... outfits:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonNeutrals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Neutral"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:buttonTint="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButtonBrights"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Colorful"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:buttonTint="#000000" />
+    </RadioGroup>
+
+    <!-- Outfit Type -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I want my outfit to include accessories"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupAccesories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:buttonTint="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButtonYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:buttonTint="#000000" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonDone"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="Done"
+        android:background="#f1ded9"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp" />
+
+    <ImageView
+        android:id="@+id/topImageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/form2"
+        android:scaleType="centerCrop" />
+</LinearLayout>

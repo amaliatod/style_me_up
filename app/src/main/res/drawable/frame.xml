@@ -1,0 +1,6 @@
+<!-- frame.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFFFFF" /> <!-- Set the frame color, e.g., black -->
+    <stroke android:width="5dp" android:color="#FB77C5" /> <!-- Set the frame border color and width, e.g., green -->
+    <corners android:radius="10dp" /> <!-- Set the corner radius of the frame, e.g., 10dp -->
+</shape>

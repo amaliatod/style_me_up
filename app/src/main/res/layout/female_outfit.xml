@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I want my outfit to have:"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="210dp"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:padding="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/topbottom"
+        android:clickable="true"
+        android:layout_marginTop="280dp"
+        android:padding="8dp"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView1"
+        android:layout_marginTop="16dp"
+        android:text="Top and Bottoms"
+        android:layout_marginLeft="45dp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/dress"
+        android:clickable="true"
+        android:padding="8dp"
+        android:layout_marginTop="280dp"
+        android:layout_toRightOf="@id/imageView1"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView2"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="295dp"
+        android:text="Dress"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
